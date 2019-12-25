@@ -2,6 +2,7 @@ package matches;
 
 import matches.console.ConsoleInput;
 import matches.console.ConsoleOutput;
+import matches.game.Game;
 import matches.game.GameTwentyMatches;
 import matches.players.Human;
 import matches.players.Machine;
@@ -11,7 +12,7 @@ public class Main {
   static int select = -1;
   static boolean isScannerInputValid = false;
   static Player[] players = new Player[2];
-  static GameTwentyMatches newGameTwentyMatches;
+  static Game game;
 
   public static void main(String[] args) {
 
@@ -32,9 +33,10 @@ public class Main {
     }
     if (select == 1) {
       addPlayersForNewGame();
-      newGameTwentyMatches = GameTwentyMatches.getInstance();
-      newGameTwentyMatches.setPlayers(players);
-      newGameTwentyMatches.startGame();
+      // создаю GameTwentyMatches, но можно создать расширить вариации игры в дальнешем
+      game = GameTwentyMatches.getInstance();
+      game.setPlayers(players);
+      game.startGame();
     }
     consoleInput.scannerClose();
   }
@@ -54,7 +56,7 @@ public class Main {
   }
 
   public static void addPlayersForNewGame() {
-    players[0] = new Machine();
-    players[1] = new Human();
+    players[0] = new Machine("Компьютер");
+    players[1] = new Human("Человек");
   }
 }

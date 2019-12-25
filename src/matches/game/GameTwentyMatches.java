@@ -9,17 +9,19 @@ public class GameTwentyMatches extends Game {
   private int matchesNow;
   private Player[] players;
 
-
+  @Override
   public int getMatchesNow() {
     return matchesNow;
   }
 
+  @Override
   public void setMatchesNow(int matchesNow) {
     this.matchesNow = matchesNow;
   }
 
-  public Player[] getPlayers() {
-    return players;
+  @Override
+  public GameOptions getGAME_OPTIONS() {
+    return GAME_OPTIONS;
   }
 
   public void setPlayers(Player[] players) {
@@ -27,6 +29,8 @@ public class GameTwentyMatches extends Game {
   }
 
   private GameTwentyMatches() {
+    int minRemoveMatches = super.getMIN_REMOVE_MATCHES();
+    int maxRemoveMatches = super.getMAX_REMOVE_MATCHES();
     matchesNow = MAX_MATCHES;
   }
 
@@ -39,15 +43,28 @@ public class GameTwentyMatches extends Game {
 
   @Override
   public void startGame() {
+    System.out.println("Начало игры. Компьютер ходит первым! На столе 20 спичек");
     while (matchesNow > 1) {
       for (Player nextPlayer : players) {
-        System.out.println(nextPlayer.toString());
+        int matches = nextPlayer.getMatchesNow(this);
+
+        if (matches == MAX_MATCHES) {
+          System.out.println("Компьютер явно что-то задумал!");
+        } else {
+          System.out.println("Осталось спичек: " + matches);
+        }
+
+        int matchesMinus = nextPlayer.removeMatches(this);
+
+        nextPlayer.setMatchesNow(this, matches - matchesMinus);
+
+        System.out.println(nextPlayer.getName() + " делает ход. Убрано спичек: " + matchesMinus);
+
+        if (matchesNow == 1) {
+          System.out.println("К сожалению Компьютер выиграл");
+          break;
+        }
       }
     }
-  }
-
-  @Override
-  public void stopGame() {
-    instance = null;
   }
 }

@@ -1,9 +1,61 @@
 package matches.players;
 
-import matches.game.GameTwentyMatches;
+import matches.console.ConsoleInput;
+import matches.game.Game;
 
 public class Human extends Player {
+  ConsoleInput consoleInput = new ConsoleInput();
+  String name;
+  boolean isValidChoice;
+  int humanChoice = -1;
+  int maxChoice;
+  int minChoice;
+
+  public Human(String name) {
+    this.name = name;
+  }
 
   @Override
-  void removeMatches(GameTwentyMatches game) {}
+  public void setMatchesNow(Game game, int value) {
+    game.setMatchesNow(value);
+  }
+
+  @Override
+  public int getMatchesNow(Game game) {
+    return game.getMatchesNow();
+  }
+
+  @Override
+  public int removeMatches(Game game) {
+    maxChoice = game.getMAX_REMOVE_MATCHES();
+    minChoice = game.getMIN_REMOVE_MATCHES();
+    humanChoice = -1;
+    isValidChoice = false;
+    humanChoice = consoleInput.scannerInputToInt();
+    setValidChoice();
+    while (!isValidChoice) {
+      System.out.println("Введите число от " + minChoice + " до " + maxChoice);
+      humanChoice = consoleInput.scannerInputToInt();
+      setValidChoice();
+    }
+
+    return humanChoice;
+  }
+
+  void setValidChoice() {
+    if (humanChoice > maxChoice) {
+      isValidChoice = false;
+      return;
+    }
+    if (humanChoice < minChoice) {
+      isValidChoice = false;
+      return;
+    }
+    isValidChoice = true;
+  }
+
+  @Override
+  public String getName() {
+    return name;
+  }
 }
