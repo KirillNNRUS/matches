@@ -3,10 +3,12 @@ package matches.game;
 import matches.players.Player;
 
 public class GameTwentyMatches extends Game {
+  private static GameTwentyMatches instance;
   private final int MAX_MATCHES = 20;
-  int matchesNow;
-  Player[] players;
-  Player nextPlayer;
+  private final GameOptions GAME_OPTIONS = GameOptions.TWENTY_MATCHES;
+  private int matchesNow;
+  private Player[] players;
+
 
   public int getMatchesNow() {
     return matchesNow;
@@ -24,21 +26,28 @@ public class GameTwentyMatches extends Game {
     this.players = players;
   }
 
-  public Player getNextPlayer() {
-    return nextPlayer;
+  private GameTwentyMatches() {
+    matchesNow = MAX_MATCHES;
   }
 
-  public void setNextPlayer(Player nextPlayer) {
-    this.nextPlayer = nextPlayer;
+  public static GameTwentyMatches getInstance() {
+    if (instance == null) {
+      instance = new GameTwentyMatches();
+    }
+    return instance;
   }
 
-  public GameTwentyMatches(int matchesNow, Player[] players, Player nextPlayer) {
-    this.matchesNow = matchesNow;
-    this.players = players;
-    this.nextPlayer = nextPlayer;
+  @Override
+  public void startGame() {
+    while (matchesNow > 1) {
+      for (Player nextPlayer : players) {
+        System.out.println(nextPlayer.toString());
+      }
+    }
   }
 
-  void gameBegin() {
-      matchesNow = MAX_MATCHES;
+  @Override
+  public void stopGame() {
+    instance = null;
   }
 }

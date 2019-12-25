@@ -1,8 +1,9 @@
 package matches.players;
 
-public class Machine extends Player{
-    @Override
-    void removeMatches() {
+import matches.game.GameTwentyMatches;
 
-    }
+public class Machine extends Player {
+
+  @Override
+  void removeMatches(GameTwentyMatches game) {}
 }

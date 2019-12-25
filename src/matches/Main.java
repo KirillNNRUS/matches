@@ -1,35 +1,47 @@
 package matches;
 
+import matches.console.ConsoleInput;
 import matches.console.ConsoleOutput;
-
-import java.util.Scanner;
+import matches.game.GameTwentyMatches;
+import matches.players.Human;
+import matches.players.Machine;
+import matches.players.Player;
 
 public class Main {
   static int select = -1;
   static boolean isScannerInputValid = false;
-  static Scanner in = new Scanner(System.in);
+  static Player[] players = new Player[2];
+  static GameTwentyMatches newGameTwentyMatches;
 
   public static void main(String[] args) {
+
     ConsoleOutput consoleOutput = new ConsoleOutput();
+    ConsoleInput consoleInput = new ConsoleInput();
 
     consoleOutput.consoleOutput(
         "Здравствуйте!", "Поиграем в 20 спичек??", "\r\n", "0 - если Да", "1 - если Нет");
 
     consoleOutput.consoleOutput("Ваш выбор?");
-    scannerInputToInt();
+    select = consoleInput.scannerInputToInt();
     setIsScannerInputValidBeginGame();
 
     while (!isScannerInputValid) {
       consoleOutput.consoleOutput("0 - если Да", "1 - если Нет");
-      scannerInputToInt();
+      select = consoleInput.scannerInputToInt();
       setIsScannerInputValidBeginGame();
     }
+    if (select == 1) {
+      addPlayersForNewGame();
+      newGameTwentyMatches = GameTwentyMatches.getInstance();
+      newGameTwentyMatches.setPlayers(players);
+      newGameTwentyMatches.startGame();
+    }
+    consoleInput.scannerClose();
   }
 
   public static void setIsScannerInputValidBeginGame() {
     if (select == 1) {
       isScannerInputValid = true;
-
       return;
     }
 
@@ -41,15 +53,8 @@ public class Main {
     isScannerInputValid = false;
   }
 
-  public static void scannerInputToInt() {
-    // Знаю, что можно in.nextInt(), но почему то потом перестает снова заходить в блок try, если
-    // найду почему переделаю
-    String temp = in.nextLine();
-
-    try {
-      select = Integer.parseInt(temp);
-    } catch (Exception e) {
-      System.out.println("Введите число");
-    }
+  public static void addPlayersForNewGame() {
+    players[0] = new Machine();
+    players[1] = new Human();
   }
 }
