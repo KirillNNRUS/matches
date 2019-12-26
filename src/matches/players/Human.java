@@ -1,15 +1,17 @@
 package matches.players;
 
 import matches.console.ConsoleInput;
+import matches.console.ConsoleOutput;
 import matches.game.Game;
 
 public class Human extends Player {
-  ConsoleInput consoleInput = new ConsoleInput();
-  String name;
-  boolean isValidChoice;
-  int humanChoice = -1;
-  int maxChoice;
-  int minChoice;
+  private ConsoleInput consoleInput = new ConsoleInput();
+  private ConsoleOutput consoleOutput = new ConsoleOutput();
+  private String name;
+  private boolean isValidChoice;
+  private int humanChoice = -1;
+  private int maxChoice;
+  private int minChoice;
 
   public Human(String name) {
     this.name = name;
@@ -34,7 +36,7 @@ public class Human extends Player {
     humanChoice = consoleInput.scannerInputToInt();
     setValidChoice();
     while (!isValidChoice) {
-      System.out.println("Введите число от " + minChoice + " до " + maxChoice);
+      consoleOutput.consoleOutput("Введите число от " + minChoice + " до " + maxChoice);
       humanChoice = consoleInput.scannerInputToInt();
       setValidChoice();
     }

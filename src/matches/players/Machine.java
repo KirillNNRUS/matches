@@ -3,7 +3,7 @@ package matches.players;
 import matches.game.Game;
 
 public class Machine extends Player {
-  String name;
+  private String name;
 
   public Machine(String name) {
     this.name = name;
@@ -21,7 +21,7 @@ public class Machine extends Player {
 
   @Override
   public int removeMatches(Game game) {
-    //IDEA предлагает заменить на if, но не буду
+    // IDEA предлагает заменить на if, но не буду
     switch (game.getGAME_OPTIONS()) {
       case TWENTY_MATCHES:
         return removeMatchesTwentyMatches(game);

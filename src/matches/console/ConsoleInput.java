@@ -3,6 +3,7 @@ package matches.console;
 import java.util.Scanner;
 
 public class ConsoleInput {
+  private ConsoleOutput consoleOutput = new ConsoleOutput();
   Scanner in = new Scanner(System.in);
 
   public int scannerInputToInt() {
@@ -13,12 +14,12 @@ public class ConsoleInput {
     try {
       return Integer.parseInt(temp);
     } catch (Exception e) {
-      System.out.println("Введите число");
+      consoleOutput.consoleOutput("Введите число");
     }
     return -1;
   }
 
   public void scannerClose() {
-      in.close();
+    in.close();
   }
 }

@@ -3,8 +3,8 @@ package matches.game;
 import matches.players.Player;
 
 public abstract class Game {
-  final int MAX_REMOVE_MATCHES = 3;
-  final int MIN_REMOVE_MATCHES = 1;
+  private final int MAX_REMOVE_MATCHES = 3;
+  private final int MIN_REMOVE_MATCHES = 1;
 
   public abstract GameOptions getGAME_OPTIONS();
 
@@ -23,4 +23,6 @@ public abstract class Game {
   public abstract void setMatchesNow(int matchesNow);
 
   public abstract void startGame();
+
+  public abstract void stopGame();
 }
