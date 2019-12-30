@@ -6,7 +6,7 @@ public abstract class Game {
   private final int MAX_REMOVE_MATCHES = 3;
   private final int MIN_REMOVE_MATCHES = 1;
 
-  public abstract GameOptions getGAME_OPTIONS();
+  public abstract int getMAX_MATCHES();
 
   public int getMAX_REMOVE_MATCHES() {
     return MAX_REMOVE_MATCHES;

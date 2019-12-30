@@ -5,11 +5,15 @@ import matches.players.Player;
 
 public class GameTwentyMatches extends Game {
   private static GameTwentyMatches instance;
-  private final int MAX_MATCHES = 20;
-  private final GameOptions GAME_OPTIONS = GameOptions.TWENTY_MATCHES;
+  private final int MAX_MATCHES = 40; //Тут устанавливаем максимальное количество спичек
   private ConsoleOutput consoleOutput = new ConsoleOutput();
   private int matchesNow;
   private Player[] players;
+
+  @Override
+  public int getMAX_MATCHES() {
+    return MAX_MATCHES;
+  }
 
   @Override
   public int getMatchesNow() {
@@ -21,18 +25,11 @@ public class GameTwentyMatches extends Game {
     this.matchesNow = matchesNow;
   }
 
-  @Override
-  public GameOptions getGAME_OPTIONS() {
-    return GAME_OPTIONS;
-  }
-
   public void setPlayers(Player[] players) {
     this.players = players;
   }
 
   private GameTwentyMatches() {
-    int minRemoveMatches = super.getMIN_REMOVE_MATCHES();
-    int maxRemoveMatches = super.getMAX_REMOVE_MATCHES();
     matchesNow = MAX_MATCHES;
   }
 

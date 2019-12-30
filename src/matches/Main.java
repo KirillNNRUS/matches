@@ -42,14 +42,12 @@ public class Main {
 
       if (select == 1) {
         addPlayersForNewGame();
-        // создаю GameTwentyMatches, но можно создать расширить вариации игры в дальнешем, например
-        // увеличив количество спичек.
         game = GameTwentyMatches.getInstance();
         game.setPlayers(players);
         game.startGame();
         game.stopGame();
-        consoleOutput.consoleOutput("Хотите сыграть еще раз??");
-        consoleOutput.consoleOutput("1 - если Да.", "0 - если Нет");
+        consoleOutput.consoleOutput("###   Еще раз??   ###");
+        consoleOutput.consoleOutput("0 - Выход");
         select = consoleInput.scannerInputToInt();
         setIsScannerInputValidBeginGame();
       } else {
@@ -68,7 +66,7 @@ public class Main {
       isScannerInputValid = true;
       return;
     }
-
+    select = 1;
     isScannerInputValid = false;
   }
 

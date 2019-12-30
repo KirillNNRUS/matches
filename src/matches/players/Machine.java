@@ -4,6 +4,11 @@ import matches.game.Game;
 
 public class Machine extends Player {
   private String name;
+  private final int FIRST_STEP = 3;
+  //Не придумал название поэтому SOME_VALUE, которое равно "4"  и позволяет найти mustBeMatchesForWin для компа
+  private final int SOME_VALUE = 4;
+  private int stepAfterFirst = 1;
+  private int mustBeMatchesForWin;
 
   public Machine(String name) {
     this.name = name;
@@ -21,35 +26,21 @@ public class Machine extends Player {
 
   @Override
   public int removeMatches(Game game) {
-    // IDEA предлагает заменить на if, но не буду
-    switch (game.getGAME_OPTIONS()) {
-      case TWENTY_MATCHES:
-        return removeMatchesTwentyMatches(game);
+    if (game.getMatchesNow() == game.getMAX_MATCHES()) {
+
+      return FIRST_STEP;
     }
-    return 0;
+    findMustBeMatchesForWin(game);
+    return game.getMatchesNow() - mustBeMatchesForWin;
+  }
+
+  private void findMustBeMatchesForWin(Game game) {
+    mustBeMatchesForWin = (game.getMAX_MATCHES() - FIRST_STEP) - (SOME_VALUE * stepAfterFirst);
+    stepAfterFirst++;
   }
 
   @Override
   public String getName() {
     return name;
-  }
-
-  int removeMatchesTwentyMatches(Game game) {
-    if (game.getMatchesNow() == 20) {
-      return 3;
-    }
-    if (game.getMatchesNow() > 13) {
-      return game.getMatchesNow() - 13;
-    }
-    if (game.getMatchesNow() > 9) {
-      return game.getMatchesNow() - 9;
-    }
-    if (game.getMatchesNow() > 5) {
-      return game.getMatchesNow() - 5;
-    }
-    if (game.getMatchesNow() > 1) {
-      return game.getMatchesNow() - 1;
-    }
-    return 0;
   }
 }
