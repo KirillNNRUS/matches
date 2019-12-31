@@ -3,6 +3,7 @@ package matches;
 import matches.console.ConsoleInput;
 import matches.console.ConsoleOutput;
 import matches.game.Game;
+import matches.game.GameFortyMatches;
 import matches.game.GameTwentyMatches;
 import matches.players.Human;
 import matches.players.Machine;
@@ -42,7 +43,21 @@ public class Main {
 
       if (select == 1) {
         addPlayersForNewGame();
-        game = GameTwentyMatches.getInstance();
+        consoleOutput.consoleOutput("Выбирите количество спичек");
+        consoleOutput.consoleOutput("1 - 20", " или ", "0 - 40");
+        select = consoleInput.scannerInputToInt();
+        setIsScannerInputValidBeginGame();
+        while (!isScannerInputValid) {
+          consoleOutput.consoleOutput("1 - 20", " или ", "0 - 40");
+          select = consoleInput.scannerInputToInt();
+          setIsScannerInputValidBeginGame();
+        }
+        if (select == 1) {
+          game = GameTwentyMatches.getInstance();
+        } else {
+          game = GameFortyMatches.getInstance();
+        }
+
         game.setPlayers(players);
         game.startGame();
         game.stopGame();

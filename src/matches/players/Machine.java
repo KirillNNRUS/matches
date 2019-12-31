@@ -5,7 +5,8 @@ import matches.game.Game;
 public class Machine extends Player {
   private String name;
   private final int FIRST_STEP = 3;
-  //Не придумал название поэтому SOME_VALUE, которое равно "4"  и позволяет найти mustBeMatchesForWin для компа
+  // Не придумал название поэтому SOME_VALUE, которое равно "4" и позволяет найти
+  // mustBeMatchesForWin для компа
   private final int SOME_VALUE = 4;
   private int stepAfterFirst = 1;
   private int mustBeMatchesForWin;

@@ -3,9 +3,9 @@ package matches.game;
 import matches.console.ConsoleOutput;
 import matches.players.Player;
 
-public class GameTwentyMatches extends Game {
-  private static GameTwentyMatches instance;
-  private final int MAX_MATCHES = 20; // Тут устанавливаем максимальное количество спичек
+public class GameFortyMatches extends Game {
+  private static GameFortyMatches instance;
+  private final int MAX_MATCHES = 40; // Тут устанавливаем максимальное количество спичек
   private ConsoleOutput consoleOutput = new ConsoleOutput();
   private int matchesNow;
   private Player[] players;
@@ -29,13 +29,13 @@ public class GameTwentyMatches extends Game {
     this.players = players;
   }
 
-  private GameTwentyMatches() {
+  private GameFortyMatches() {
     matchesNow = MAX_MATCHES;
   }
 
-  public static GameTwentyMatches getInstance() {
+  public static GameFortyMatches getInstance() {
     if (instance == null) {
-      instance = new GameTwentyMatches();
+      instance = new GameFortyMatches();
     }
     return instance;
   }
